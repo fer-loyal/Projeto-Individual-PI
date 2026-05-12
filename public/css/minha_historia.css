@@ -10,12 +10,6 @@
   --branco:      #f5f0e8;
 }
 
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
 
 body { 
 font-family: 'Cormorant Garamond', serif; 
@@ -76,4 +70,19 @@ header {
 
 .nav_list a:hover {
   color: var(--ouro);
+}
+
+
+
+
+
+.footer {
+  text-align: center;
+  font-family: 'Share Tech Mono';
+  font-size: 16px;
+}
+
+.footer p {
+  font-size: 15px;
+  color: var(--texto-fraco);
 }
