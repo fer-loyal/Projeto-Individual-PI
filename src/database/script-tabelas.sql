@@ -7,19 +7,18 @@ comandos para mysql server
 */
 
 CREATE DATABASE SpiralOutnet ;
-USE SpiralOutnet;
+USE spiralOutnet;
 
 CREATE TABLE usuario (
-	id INT PRIMARY KEY AUTO_INCREMENT,
+	id_usuario INT PRIMARY KEY AUTO_INCREMENT,
 	nome VARCHAR(50),
 	email VARCHAR(50),
 	senha VARCHAR(50)
 );
 
 CREATE TABLE quiz (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	certas INT,
-	erradas INT,
+	id_quiz INT PRIMARY KEY AUTO_INCREMENT,
+	pontuacaoFinal INT,
 	porcentagem INT,
 	data_horario DATETIME DEFAULT NOW(),
 	id_usuario INT,
