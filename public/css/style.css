@@ -1,7 +1,7 @@
 :root {
   --ouro:        #c9a227;
   --ouro-escuro: #7a601a;
-  --ouro-borda:  rgba(201, 162, 39, 0.25);
+  --ouro-borda:  #c9a22740;
   --fundo:       #0a0808;
   --fundo-2:     #0f0c0c;
   --fundo-card:  #161010;
@@ -72,7 +72,7 @@ header {
   padding: 0 48px;
   height: 68px;
 
-  background: #000000e0;
+  background: #000000;
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--ouro-borda);
 }
@@ -135,7 +135,6 @@ header {
 
 .hero-content {
   position: relative;
-  z-index: 2;
   max-width: 580px;
   padding: 80px 72px;
 }
@@ -264,7 +263,6 @@ header {
 .album-desc {
   font-size: 14px;
   color: var(--texto);
-  line-height: 1.65;
   font-style: italic;
 }
 
@@ -278,3 +276,4 @@ header {
   font-size: 15px;
   color: var(--texto-fraco);
 }
+
