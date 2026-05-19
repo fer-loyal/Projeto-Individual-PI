@@ -11,7 +11,7 @@
     <script src="./js/sessao.js"></script>
 
     <link rel="stylesheet" href="./css/login_cadastro.css" />
-    <link rel="icon" href="./assets/icon/favicon2.ico">
+    <link rel="icon" href="./assets/imgs/logo.png">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 </head>
@@ -101,10 +101,9 @@
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID_USUARIO = json.id;
-                    sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
 
                     setTimeout(function () {
-                        window.location.href = "./public/assets/dashboard.html";
+                        window.location.href = "./assets/dashboard.html";
                     }, 1000); // apenas para exibir o loading
 
                 });
@@ -113,12 +112,12 @@
                 alert("Houve um erro ao tentar realizar o login!")
 
                 /*
-                console.log("Houve um erro ao tentar realizar o login!");
+                console.log("Houve um erro ao tentar realizar o login!");*/
 
                 resposta.text().then(texto => {
                     console.error(texto);
                     finalizarAguardar(texto);
-                });*/
+                });
             }
 
         }).catch(function (erro) {
