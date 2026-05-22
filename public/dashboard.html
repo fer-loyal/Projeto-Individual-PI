@@ -4,8 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SpiralOut.net | Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>
+
+<body style="display: flex;">
+    <div>
+        <canvas id="myChart" style="position: relative; height: 40vh; width: 40vh"></canvas>
+    </div>
     
+        <!-- Navbar -->
+    <header>
+        <a href="index.html"> <img src="assets/imgs/logo_navbar_tool.svg" alt="Imagem da logo da navbar" class="logo"></a>
+
+        <ul class="nav_list">
+            <li><a href="index.html">SOBRE A BANDA</a></li>
+            <li><a href="quiz.html">QUIZ</a></li>
+        </ul>
+    </header>
+
 </body>
+
+<script>
+    const labels = [
+        
+    ]
+
+
+
+
+
+<script>
+    const myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+    );
+</script>
+
 </html>

@@ -1,7 +1,7 @@
 :root {
   --ouro:        #c9a227;
   --ouro-escuro: #7a601a;
-  --ouro-borda:  rgba(201, 162, 39, 0.25);
+  --ouro-borda:  #c9a22740;
   --fundo:       #0a0808;
   --fundo-2:     #0f0c0c;
   --fundo-card:  #161010;
@@ -18,7 +18,7 @@
 }
 
 body { 
-font-family: 'Cormorant Garamond', serif; 
+font-family: 'Serifada', serif; 
 background: #0a0a0a; 
 color: #d4cfc4; 
 margin: 0; 
@@ -67,7 +67,7 @@ header {
 }
 
 .nav_list a {
-  font-family: 'Cinzel';
+  font-family: 'Serifada';
   font-size: 12px;
   font-weight: 400;
   color: var(--texto);
@@ -88,7 +88,7 @@ gap: 16px;
 }
  
 #btnIniciarQuiz {
-font-family: 'Cinzel', serif;
+font-family: 'Serifada', serif;
 font-size: 13px;
 letter-spacing: 3px;
 color: #b8965a;
@@ -102,7 +102,7 @@ align-self: center;
 #pontuacao, #jogo { border: 1px solid #2a2a2a; padding: 1rem; }
  
 button {
-font-family: 'Cinzel', serif;
+font-family: 'Serifada', serif;
 font-size: 12px;
 background: transparent;
 border: 1px solid #2a2a2a;

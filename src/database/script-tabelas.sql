@@ -23,5 +23,5 @@ CREATE TABLE quiz (
 	data_horario DATETIME DEFAULT NOW(),
 	id_usuario INT,
 	CONSTRAINT fk_usuario
-	FOREIGN KEY (id_usuario) REFERENCES usuario(id)
+	FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
 );
