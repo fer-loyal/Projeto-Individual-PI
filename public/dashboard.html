@@ -27,11 +27,25 @@
 <script>
     const labels = [
         
-    ]
+    ];
 
+    const data = {
+        labels : labels,
+        datasets: [{
+            label: 'My First dataset',
+            backgroundColor: rgb(201, 162, 39),
+            borderColor: rgb(201, 162, 39),
+            data: [] ,
+        }]
+    };
 
+    const config = {
+        type: 'column',
+        data: data,
+        options: {}
+    };
 
-
+</script>
 
 <script>
     const myChart = new Chart(

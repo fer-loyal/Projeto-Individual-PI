@@ -25,3 +25,13 @@ CREATE TABLE quiz (
 	CONSTRAINT fk_usuario
 	FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
 );
+
+CREATE TABLE resposta (
+id_resposta INT PRIMARY KEY AUTO_INCREMENT,
+numero_questao INT,
+acertou BOOLEAN,
+fk_quiz INT,
+CONSTRAINT ctfkquiz
+FOREIGN KEY (fk_quiz)
+REFERENCES quiz(id_quiz)
+);
