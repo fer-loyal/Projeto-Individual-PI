@@ -30,7 +30,8 @@ function buscarMediaDeAcertos() {
 /* Verifica se a questao é verdadeira ou falsa (boolean) */
 function buscarAcertosPorQuestao(){
     var instrucaoSql = `
-    SELECT numero_questao, COUNT(*) AS total_acertos
+    SELECT numero_questao, 
+    COUNT(*) AS total_acertos
     FROM resposta
     WHERE acertou = true
     GROUP BY numero_questao

@@ -1,5 +1,5 @@
 var dashboardModel = require("../models.dashboardModel");
-const { buscarMelhorPontuacao } = require("../models/dashboardModel");
+const  buscarMelhorPontuacao  = require("../models/dashboardModel");
 
 function buscarDadosDashboard(req, res) {
     /* Promise.all executa as 4 queries ao mesmo tempo -> só responde quando todas terminaram se serem executadas */
