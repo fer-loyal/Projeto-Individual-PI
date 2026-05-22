@@ -22,36 +22,71 @@
         </ul>
     </header>
 
+    <h2>Estatística do Quiz</h2>
+
+    <!-- KPIs -->
+     <div id="kpis">
+        <div class="kpi-card">
+            <span class="kpi-titulo">Total de Quizzes</span>
+            <span class="kpi-valor" id="kpiMelhor">...</span>
+        </div>
+        <div class="kpi-card">
+            <span class="kpi-titulo">Média de Acertos</span>
+            <span class="kpi-valor" id="kpiMedia">...</span>
+        </div>
+     </div>
+
+     <!-- Gráfico -->
+      <div id="grafico-container">
+        <canvas id="graficosAcertos"></canvas>
+      </div>
 </body>
 
 <script>
-    const labels = [
-        
-    ];
+    /* aqui busca dados da API */
+    fetch("/dashboard/dados")
+        .then(function (resposta) {
+            return resposta.json();
+        })
+        .then(function (dados) {
+            /* para preencher as kpis */
+            document.getElementById("kpiTotal").innerHTML = dados.total ;
+            document.getElementById("kpiMelhor").innerHTML = dados.melhorPontuacao + " / 5" ;
+            document.getElementById("kpiMedia").innerHTML = dados.mediaAcertos + "%" ;
 
-    const data = {
-        labels : labels,
-        datasets: [{
-            label: 'My First dataset',
-            backgroundColor: rgb(201, 162, 39),
-            borderColor: rgb(201, 162, 39),
-            data: [] ,
-        }]
-    };
+            /* agora monta o array de valore para o gráfico */
+            var labels = dados.acertosPorQuestao.map(function (q) {
+                return "Questão " + q.numero_questao;
+            });
+            var valores = dados.acertosPorQuestao.map(function(q) {
+                return q.total_acertos;
+            });
 
-    const config = {
-        type: 'column',
-        data: data,
-        options: {}
-    };
-
+            /* para criar o gráfico de barras com o chart.js */
+            new Chart(document.getElementById("graficoAcertos"), {
+                type: "bar",
+                data: {
+                    labels : labels,
+                    datasets: [{
+                        label : "Usuários que acertaram",
+                        data: valores,
+                        backgroundColor : "rgba(201, 162, 39, 0.7)",
+                        borderColor: "rgb(201, 162, 39)",
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { stepSize: 1 }
+                        }
+                    }
+                }
+            });
+        })
+        .catch(function (erro) {
+            console.log("Erro ao carregar dados da dashboard: ", erro);
+        });
 </script>
-
-<script>
-    const myChart = new Chart(
-        document.getElementById('myChart'),
-        config
-    );
-</script>
-
 </html>
