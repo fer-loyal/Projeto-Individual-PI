@@ -22,7 +22,7 @@ var medidasRouter = require("./src/routes/medidas");
 var aquariosRouter = require("./src/routes/aquarios");
 var empresasRouter = require("./src/routes/empresas");
 var dashboardRouter = require("./src/routes/dashboard");
-var quizRouter = require("./routes/quizRouter");
+var quizRouter = require("./src/routes/quizRouter");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

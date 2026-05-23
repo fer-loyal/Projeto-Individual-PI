@@ -1,4 +1,4 @@
-var quizModel = require("../models/quizModel");
+var quizModel = require("./quizModel");
 
 function salvarResultado(req, res) {
     var pontuacaoFinal = req.body.pontuacaoFinal;
@@ -14,7 +14,7 @@ function salvarResultado(req, res) {
         return res.status(400).send("porcentagem está undefined!!");
     }
     else if (idUsuario == undefined) {
-        return res.status(400).send("idUsuario está undefined!");
+        return res.status(400).send("idUsuario está undefined!!");
     } 
     else if (respostas == undefined || respostas.length === 0) {
         return res.status(400).send("respostas está undefined ou vazia!");
@@ -24,11 +24,11 @@ function salvarResultado(req, res) {
     quizModel.salvarQuiz(pontuacaoFinal, porcentagem, idUsuario)
     .then(function (resultadoQuiz) {
         var idQuizGerado = resultadoQuiz.insertId;
-        cansole.log("Quiz salvo com id: " + idQuizGerado);
+        console.log("Quiz salvo com id: " + idQuizGerado);
 
 
         /* pt2 ->  faz o INSERT da tabela resposta  */
-        var promessasDeResposta = resposta.map(function(resposta){
+        var promessasDeResposta = respostas.map(function(resposta){
             return quizModel.salvarResposta(
                 resposta.numeroQuestao,
                 resposta.acertou,
@@ -45,6 +45,6 @@ function salvarResultado(req, res) {
         res.status(500).json(erro.sqlMessage);
     });
 }
-module.export = {
+module.exports = {
     salvarResultado
 };

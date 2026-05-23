@@ -3,7 +3,7 @@ var database = require("../database/config")
 /* Conta quantas linhas existem na tabela quiz -> cada linha = um quiz realizado por alguém*/
 function buscarTotalDeQuizzes(){
     var instrucaoSql  = `
-    SELECT COUNT (*) AS total FROM quiz;
+    SELECT COUNT(*) AS total FROM quiz;
     `;
     console.log("Executando SQL: " + instrucaoSql);
     return database.executar(instrucaoSql);
