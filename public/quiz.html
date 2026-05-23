@@ -152,6 +152,7 @@
     let erradas = 0
     let quantidadeDeQuestoes = listaDeQuestoes.length
     // let isUltima = numeroDaQuestaoAtual == quantidadeDeQuestoes-1 ? true : false
+    let respostasDoUsuario = [] /* esse vetor vi acumular o resultado de cada questão */
 
     function onloadEsconder() {
         document.getElementById('pontuacao').style.display = "none"
@@ -263,7 +264,11 @@
                 pontuacaoFinal++
                 certas++
                 document.getElementById("spanCertas").innerHTML = certas
+                /* registra que o usuário acertou a questão */
+                respostasDoUsuario.push({numeroQuestao : numeroDaQuestaoAtual + 1, acertou: true})
+                
                 numeroDaQuestaoAtual++
+
             } else if (option.checked && option.value !== respostaQuestaoAtual) {
                 const wrongLabelId = option.labels[0].id
 
@@ -272,7 +277,11 @@
                 tentativaIncorreta++
                 erradas++
                 document.getElementById("spanErradas").innerHTML = erradas
+               /* resgistra que o usuário ERROU essa questão */
+               respostasDoUsuario.push({ numeroQuestao: numeroDaQuestaoAtual + 1, acertou: false})
+               
                 numeroDaQuestaoAtual++
+                
             }
         })
     }
@@ -309,7 +318,7 @@
             textoParaMensagemFinal = "Alto número de acertos!"
             classComCoresParaMensagemFinal = "text-success-with-bg"
         }
-
+        const porcentagemFinal = Math.round(porcentagemFinalDeAcertos * 100)
         textoParaMensagemFinal += "<br> Você acertou " + Math.round((porcentagemFinalDeAcertos)*100) + "% das questões."
 
 
@@ -318,7 +327,6 @@
         document.getElementById('msgFinal').innerHTML = textoParaMensagemFinal
         document.getElementById('msgFinal').classList.add(classComCoresParaMensagemFinal) 
         document.getElementById('spanPontuacaoFinal').innerHTML = pontuacaoFinal
-
         document.getElementById('jogo').classList.add("text-new-gray") 
 
         btnProx.disabled = true
@@ -326,8 +334,29 @@
         // btnConcluir.disabled = true
         btnTentarNovamente.disabled = false
 
-    }
+        /* pegar id do usuário logado */
+        /* se não estiver logado o idUsuario fica null */
+        var idUsuario = sessionStorage.getItem("id")
 
+        fetch ("/quiz/salvar",{
+            method: "POST", 
+            headers: {"Content-Type" : "application/json" },
+            body: JSON.stringify({
+                pontuacaoFinal: pontuacaoFinal,
+                porcentagem: pontuacaoFinal,
+                idUsuario: idUsuario,
+                respostas: respostasDoUsuario /* o array com as 5 respostas */
+            })
+        })
+        .then(function (resposta) {return resposta.json() })
+        .then(function (dados) {
+            console.log("Resultado salvo com sucesso:", dados.mensagem)
+        })
+        .catch(function (erro){
+            console.log("Erro ao salvar resultado:", erro)
+        })
+    }
+    
     function redirecionarDash(){
         window.location.href = "dashboard.html";
     }
