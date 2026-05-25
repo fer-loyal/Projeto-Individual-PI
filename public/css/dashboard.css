@@ -1,7 +1,7 @@
 :root {
   --ouro:        #c9a227;
   --ouro-escuro: #7a601a;
-  --ouro-borda:  rgba(201, 162, 39, 0.25);
+  --ouro-borda:  #c9a22740;
   --fundo:       #0a0808;
   --fundo-2:     #0f0c0c;
   --fundo-card:  #161010;
@@ -77,4 +77,8 @@ header {
 
 .nav_list a:hover {
   color: var(--ouro);
+}
+
+.kpis{
+  padding: 1000px;
 }

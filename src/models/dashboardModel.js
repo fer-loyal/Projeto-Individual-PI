@@ -1,48 +1,37 @@
 var database = require("../database/config")
 
 /* Conta quantas linhas existem na tabela quiz -> cada linha = um quiz realizado por alguém*/
-function buscarTotalDeQuizzes(){
+function buscarTotalDeQuizzes(fkUsuario){
     var instrucaoSql  = `
-    SELECT COUNT(*) AS total FROM quiz;
+        SELECT COUNT(*) AS total FROM quiz WHERE id_usuario = ${fkUsuario};
     `;
     console.log("Executando SQL: " + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
-/* Pega o maior valor de pontuação ja registrado */
-function buscarMelhorPontuacao() {
-    var instrucaoSql = `
-    SELECT MAX(pontuacaoFinal) AS melhor FROM quiz;
-    `;
-    console.log("Executando SQL: " + instrucaoSql);
-    return database.executar(instrucaoSql);
-}
+
 
 /* Tira a média de todas as porcentagens  */
-function buscarMediaDeAcertos() {
+function buscarMediaDeAcertos(fkUsuario) {
     var instrucaoSql = `
-        SELECT ROUND(AVG(porcentagem), 1) AS media FROM quiz;
+        SELECT ROUND(AVG(porcentagem), 1) AS media FROM quiz WHERE id_usuario= ${fkUsuario};
     `;
     console.log("Executando SQL: " + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
-/* Verifica se a questao é verdadeira ou falsa (boolean) */
-function buscarAcertosPorQuestao(){
+/* dados para o gráfico */
+function buscarResultadoGrafico(fkUsuario) {
     var instrucaoSql = `
-    SELECT numero_questao, 
-    COUNT(*) AS total_acertos
-    FROM resposta
-    WHERE acertou = true
-    GROUP BY numero_questao
-    ORDER BY numero_questao;
+        SELECT pontuacaoFinal FROM quiz WHERE id_usuario = ${fkUsuario} ORDER BY data_horario DESC LIMIT 8;
     `;
     console.log("Executando SQL: " + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+
+
 module.exports = {
     buscarTotalDeQuizzes,
-    buscarMelhorPontuacao,
     buscarMediaDeAcertos,
-    buscarAcertosPorQuestao
+    buscarResultadoGrafico
 };
