@@ -1,6 +1,5 @@
 var database = require("../database/config")
 
-/* Conta quantas linhas existem na tabela quiz -> cada linha = um quiz realizado por alguém*/
 function buscarTotalDeQuizzes(fkUsuario){
     var instrucaoSql  = `
         SELECT COUNT(*) AS total FROM quiz WHERE id_usuario = ${fkUsuario};
@@ -8,7 +7,6 @@ function buscarTotalDeQuizzes(fkUsuario){
     console.log("Executando SQL: " + instrucaoSql);
     return database.executar(instrucaoSql);
 }
-
 
 
 /* Tira a média de todas as porcentagens  */
@@ -23,7 +21,10 @@ function buscarMediaDeAcertos(fkUsuario) {
 /* dados para o gráfico */
 function buscarResultadoGrafico(fkUsuario) {
     var instrucaoSql = `
-        SELECT pontuacaoFinal FROM quiz WHERE id_usuario = ${fkUsuario} ORDER BY data_horario DESC LIMIT 8;
+        SELECT pontuacaoFinal,
+        DATE_FORMAT(data_horario, '%d/%m/%Y') AS data_formatada
+        FROM quiz WHERE id_usuario = ${fkUsuario}
+        ORDER BY data_horario DESC LIMIT 8;
     `;
     console.log("Executando SQL: " + instrucaoSql);
     return database.executar(instrucaoSql);

@@ -5,11 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SpiralOut.net | Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="./css/dashboard.css" />
     
 </head>
 
-<body style="display: flex;" onload="buscarTotalDeQuizzes (), buscarMediaDeAcertos()">
+<body style="display: flex;" onload="buscarTotalDeQuizzes (), buscarMediaDeAcertos(), obterDadosGrafico()">
 
     <!-- Navbar -->
     <header>
@@ -32,15 +31,16 @@
         </div>
      </div>
 
+     <br><br><br><br>
+
     <div>
-        <canvas id="myChart" style="position: relative; height: 40vh; width: 40vh"></canvas>
+        <canvas id="myChart"></canvas>
     </div>
 
-    <h2>Estatística do Quiz</h2>
-     <!-- Gráfico -->
+    <!-- <h2>Estatística do Quiz</h2>
       <div id="grafico-container">
         <canvas id="graficoAcertos"></canvas>
-      </div>
+      </div> -->
 </body>
 
 <script>
@@ -118,21 +118,26 @@
     function obterDadosGrafico(fkUsuario) {
 
         // alterarTitulo(idAquario)
+        var fkUsuario = sessionStorage.ID_USUARIO;
+
+        proximaAtualizacao = null;
 
         if (proximaAtualizacao != undefined) {
             clearTimeout(proximaAtualizacao);
         }
 
-        fetch(`/medidas/ultimas/${fkUsuario}`, { cache: 'no-store' }).then(function (response) {
+        fetch(`/dashboard/grafico-quizzes/${fkUsuario}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                     resposta.reverse();
 
-                    plotarGrafico(resposta, fkUsuario);
+                    plotarGrafico(resposta,fkUsuario);
 
                 });
-            } else {
+            }
+            
+            else {
                 console.error('Nenhum dado encontrado ou erro na API');
             }
         })
@@ -155,31 +160,28 @@
         let dados = {
             labels: labels,
             datasets: [{
-                label: 'Umidade',
-                data: [],
-                fill: false,
-                borderColor: '#c9a227',
-                tension: 0.1
-            },
-            {
-                label: 'Temperatura',
+                label: 'Acertos',
                 data: [],
                 fill: false,
                 borderColor: '#c9a227',
                 tension: 0.1
             }]
         };
-
+        console.log('Dados para o gráfico:', dados.datasets[0].data);
+        console.log('Tipos:', dados.datasets[0].data.map(v => typeof v));
         console.log('----------------------------------------------')
         console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
         console.log(resposta)
 
         // Inserindo valores recebidos em estrutura para plotar o gráfico
-        for (i = 0; i < resposta.length; i++) {
+        for (i = 0; i < resposta.length; i++)
+        {
             var registro = resposta[i];
-            labels.push(registro.momento_grafico);
-            dados.datasets[0].data.push(registro.umidade);
-            dados.datasets[1].data.push(registro.temperatura);
+
+            //labels.push(registro.momento_grafico);
+            
+            labels.push(registro.data_formatada)
+            dados.datasets[0].data.push(Number(registro.pontuacaoFinal));
         }
 
         console.log('----------------------------------------------')
@@ -198,61 +200,12 @@
 
         // Adicionando gráfico criado em div na tela
         let myChart = new Chart(
-            document.getElementById(`myChartCanvas${fkUsuario}`),
+            document.getElementById(`myChart`),
             config
         );
 
-        setTimeout(() => atualizarGrafico(fkUsuario, dados, myChart), 2000);
+        //setTimeout(() => atualizarGrafico(fkUsuario, dados, myChart), 2000);
     }
 
-
-
-
-
-
-
-
-        /* aqui busca dados da API */
-        /*fetch("/dashboard/total-quizzes/${fkUsuario}")
-            .then(function (resposta) {
-                return resposta.json();
-            })
-            .then(function (dados) {
-                document.getElementById("kpiTotal").innerHTML = dados.total ;
-                document.getElementById("kpiMelhor").innerHTML = dados.melhorPontuacao + " / 5" ;
-                document.getElementById("kpiMedia").innerHTML = dados.mediaAcertos + "%" ;
-
-                var labels = dados.acertosPorQuestao.map(function (q) {
-                    return "Questão " + q.numero_questao;
-                });
-                var valores = dados.acertosPorQuestao.map(function(q) {
-                    return q.total_acertos;
-                });
-
-                new Chart(document.getElementById("graficoAcertos"), {
-                    type: "bar",
-                    data: {
-                        labels : labels,
-                        datasets: [{
-                            label : "Usuários que acertaram",
-                            data: valores,
-                            backgroundColor : "#c9a227",
-                            borderColor: "#c9a227",
-                            borderWidth: 2
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                ticks: { stepSize: 1 }
-                            }
-                        }
-                    }
-                });
-            })
-            .catch(function (erro) {
-                console.log("Erro ao carregar dados da dashboard: ", erro);
-            });*/
 </script>
 </html>

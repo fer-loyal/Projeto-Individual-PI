@@ -24,13 +24,10 @@ function buscarTotalDeQuizzes(req, res) {
 }
 
 function buscarMediaDeAcertos(req, res) {
-    
-    
     var fkUsuario = req.params.fkUsuario;
 
     console.log(fkUsuario);
     
-
     dashboardModel.buscarMediaDeAcertos(fkUsuario).then(function (resultado) 
     {
         console.log(resultado);
@@ -48,12 +45,9 @@ function buscarMediaDeAcertos(req, res) {
 
 
 function buscarResultadoGrafico(req, res) {
-    
-    
     var fkUsuario = req.params.fkUsuario;
 
     console.log(fkUsuario);
-    
 
     dashboardModel.buscarResultadoGrafico(fkUsuario).then(function (resultado) 
     {
@@ -69,7 +63,6 @@ function buscarResultadoGrafico(req, res) {
         res.status(500).json(erro.sqlMessage);
     });
 }
-
 
 
 module.exports = {
