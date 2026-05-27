@@ -83,7 +83,6 @@ gap: 16px;
 #btnIniciarQuiz {
 font-family: 'Serifada', serif;
 font-size: 13px;
-letter-spacing: 3px;
 color: #b8965a;
 background: transparent;
 border: 1px solid #7a6038;
@@ -102,7 +101,6 @@ border: 1px solid #2a2a2a;
 color: #d4cfc4;
 padding: 10px 16px;
 cursor: pointer;
-width: 100%;
 }
  
 button:disabled { opacity: 0.3; cursor: default; }
@@ -114,7 +112,6 @@ align-items: center;
 gap: 8px;
 padding: 9px 12px;
 border: 1px solid #2a2a2a;
-margin-bottom: 6px;
 cursor: pointer;
 }
  
@@ -135,3 +132,23 @@ cursor: pointer;
 .width-fit-content { width: fit-content; }
 .border-primary, .border-secondary { border: 1px solid #2a2a2a; }
 .text-bold         { font-weight: 600; }
+
+#btn_dashboard {
+  margin: 16px auto 0;
+  color: #c9a227;
+  border-color: #7a601a;
+  width: fit-content;
+  padding: 12px 40px;
+  align-self: center;
+  justify-content: center;
+
+}
+
+#btn_dashboard p {
+  color: #6b625a;
+  font-size: 13px;
+  margin: 0 0 8px 0;
+  align-self: center;
+  justify-content: center;
+
+}

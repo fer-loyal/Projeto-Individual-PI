@@ -1,7 +1,6 @@
 :root {
   --ouro:        #c9a227;
   --ouro-escuro: #7a601a;
-  --ouro-borda:  #c9a22740;
   --fundo:       #0a0808;
   --fundo-2:     #0f0c0c;
   --fundo-card:  #161010;
@@ -17,6 +16,9 @@ body {
   font-family: 'Sefirada';
   font-size: 18px;
   line-height: 1.75;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 100px; /* o header é fixo, o padding-top serve para que o conteudo nao fique embaixo do header */
 }
 
 a {
@@ -52,7 +54,7 @@ header {
 
   background: #000000e0;
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--ouro-borda);
+  border-bottom: 1px solid var(--ouro-escuro);
 }
 
 .logo {
@@ -81,4 +83,47 @@ header {
 
 .kpis{
   padding: 1000px;
+}
+
+/* kpis */
+#kpis {
+  display: flex;
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.kpi-card {
+  background-color: #c9a227;
+  border: 2px solid #7a601a;
+  padding: 24px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.kpi-titulo {
+  color: #ffffff;
+  font-size: 13px;
+  font-family: 'Sefirada';
+}
+
+.kpi-valor {
+  color: #0a0808;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 48px;
+  font-weight: 700;
+}
+
+/* gráfico */
+#chart-container {
+  background-color: #161010;
+  border: 5px solid #c9a22740;
+  border-radius: 8px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+#myChart {
+  width: 700px;
+  height: 350px ;
 }

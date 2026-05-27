@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SpiralOut.net | Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="./css/dashboard.css" />
+
     
 </head>
 
@@ -22,11 +24,11 @@
     <!-- KPIs -->
      <div id="kpis">
         <div class="kpi-card">
-            <span class="kpi-titulo">Total de Quizzes</span>
+            <span class="kpi-titulo">Total de Quizzes feitos por Você</span>
             <span class="kpi-valor" id="kpiMelhor">...</span>
         </div>
         <div class="kpi-card">
-            <span class="kpi-titulo">Média de Acertos</span>
+            <span class="kpi-titulo">Média dos Seus Acertos</span>
             <span class="kpi-valor" id="kpiMedia">...</span>
         </div>
      </div>
@@ -34,7 +36,9 @@
      <br><br><br><br>
 
     <div>
+        <h1>Acertos por tentativa</h1>
         <canvas id="myChart"></canvas>
+
     </div>
 
     <!-- <h2>Estatística do Quiz</h2>
