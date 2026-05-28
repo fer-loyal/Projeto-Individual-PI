@@ -12,19 +12,6 @@ function salvarQuiz(pontuacaoFinal, porcentagem, idUsuario) {
     return database.executar(instrucaoSql);
 }
 
-/* Insere uma linha na tabela resposta para cada questao respondida */
-/* numero_questao: 1 a 5  --- acertou : boolean*/
-function salvarResposta(numeroQuestao, acertou, fkQuiz) {
-    console.log("ACESSEI O QUIZ MODEL - function salvarResposta():", numeroQuestao, acertou, fkQuiz);
-
-    var instrucaoSql = `
-    INSERT INTO resposta (numero_questao, acertou, fk_quiz)
-        VALUES (${numeroQuestao}, ${acertou}, ${fkQuiz});
-    `;
-    console.log("EXECUTANDO A INSTRUÇÃO SQL: \n" +  instrucaoSql);
-    return database.executar(instrucaoSql);
-}
 module.exports = {
-    salvarQuiz,
-    salvarResposta
+    salvarQuiz
 };

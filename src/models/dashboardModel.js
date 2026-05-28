@@ -8,8 +8,6 @@ function buscarTotalDeQuizzes(fkUsuario){
     return database.executar(instrucaoSql);
 }
 
-
-/* Tira a média de todas as porcentagens  */
 function buscarMediaDeAcertos(fkUsuario) {
     var instrucaoSql = `
         SELECT ROUND(AVG(porcentagem), 1) AS media FROM quiz WHERE id_usuario= ${fkUsuario};
